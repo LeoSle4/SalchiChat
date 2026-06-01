@@ -73,3 +73,18 @@
   --color-base-300: #44403c;
   --color-base-content: #faf7f2;
 }
+
+/* Bloqueo de scroll horizontal y ajuste de tamaño nativo en móvil */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
