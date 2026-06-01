@@ -1,0 +1,75 @@
+/* Importación base de Tailwind CSS versión 4 */
+@import "tailwindcss";
+/* Plugin oficial para que el formato markdown del chat se vea estilizado */
+@plugin "@tailwindcss/typography";
+/* Habilitamos la clase .dark en el html para que funcionen las clases dark: de Tailwind */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Fuentes de Google Fonts elegidas para dar aspecto de cocina francesa */
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-copper: #c2593f;
+  --color-copper-light: #e07d65;
+  --color-brass: #cfa15c;
+  --color-cream: #faf7f2;
+  --color-slate-dark: #1c1917;
+
+  --animate-chef-chop: chop 0.5s ease-in-out infinite;
+  --animate-steam-float: steamFloat 3s ease-in-out infinite;
+  --animate-pan-sizzle: sizzle 0.15s ease-in-out infinite;
+  --animate-plate-slide: slidePlate 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes chop {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-7px) rotate(-5deg); }
+  }
+  @keyframes steamFloat {
+    0% { transform: translateY(0) scale(0.9) translateX(0); opacity: 0; }
+    50% { opacity: 0.4; }
+    100% { transform: translateY(-16px) scale(1.2) translateX(4px); opacity: 0; }
+  }
+  @keyframes sizzle {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-0.5px, -0.5px); }
+  }
+  @keyframes slidePlate {
+    0% { transform: translateY(16px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+}
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  --color-primary: #c2593f;
+  --color-primary-content: #ffffff;
+  --color-secondary: #cfa15c;
+  --color-secondary-content: #ffffff;
+  --color-neutral: #1c1917;
+  --color-neutral-content: #faf7f2;
+  --color-base-100: #ffffff;
+  --color-base-200: #faf7f2;
+  --color-base-300: #f4efe6;
+  --color-base-content: #1c1917;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-primary: #e07d65;
+  --color-primary-content: #1c1917;
+  --color-secondary: #cfa15c;
+  --color-secondary-content: #1c1917;
+  --color-neutral: #faf7f2;
+  --color-neutral-content: #1c1917;
+  --color-base-100: #1c1917;
+  --color-base-200: #292524;
+  --color-base-300: #44403c;
+  --color-base-content: #faf7f2;
+}
