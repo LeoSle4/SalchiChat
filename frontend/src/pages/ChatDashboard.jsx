@@ -226,7 +226,7 @@ const ChatDashboard = () => {
   };
 
   return (
-    <div className="flex h-screen bg-neutral-50 dark:bg-stone-950 text-neutral-800 dark:text-stone-200 overflow-hidden font-sans transition-colors duration-300">
+    <div className="flex h-screen h-[100dvh] bg-neutral-50 dark:bg-stone-950 text-neutral-800 dark:text-stone-200 overflow-hidden font-sans transition-colors duration-300">
       <div className="hidden md:block h-full w-80 shrink-0">
         <Sidebar
           sessions={sessions}
@@ -348,7 +348,7 @@ const ChatDashboard = () => {
         >
           <div className="max-w-3xl mx-auto flex gap-2 sm:gap-4">
             <textarea
-              placeholder="Escribe un ingrediente o formula tu consulta..."
+              placeholder="Formula tu consulta..."
               className="flex-1 p-3 bg-neutral-50 dark:bg-stone-800 border border-neutral-200 dark:border-stone-700 focus:border-primary dark:focus:border-primary focus:outline-none text-sm text-neutral-850 dark:text-stone-100 transition-colors resize-none min-h-[2.5rem] max-h-32 py-3 rounded-none"
               rows="1"
               value={input}
