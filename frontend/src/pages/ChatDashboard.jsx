@@ -28,6 +28,30 @@ const ChatDashboard = () => {
   // Al montar la pantalla, traemos el historial de consultas previas del usuario desde el servidor
   useEffect(() => {
     const fetchHistory = async () => {
+      if (localStorage.getItem("_mock_session") === "true") {
+        const mockHistory = [
+          {
+            id: 1,
+            sessionId: "session-1",
+            sessionTitle: "Receta de Salchipapa Gourmet",
+            prompt: "¿Cómo preparar una salchipapa gourmet?",
+            response: "Para una salchipapa gourmet, utiliza papas nativas cortadas en bastones gruesos con piel y dóralas en aceite de oliva con romero. Acompaña con salchichas artesanales ahumadas de buena calidad y una crema de ají amarillo trufada.",
+            createdAt: new Date(Date.now() - 3600000).toISOString(),
+          },
+          {
+            id: 2,
+            sessionId: "session-2",
+            sessionTitle: "Tipos de Cocción de Papas",
+            prompt: "Diferencia entre freír y hornear papas",
+            response: "La fritura crea una costra crujiente exterior por la rápida evaporación del agua superficial, mientras que el horneado cocina la papa de manera uniforme con menos grasa, logrando una textura suave por dentro.",
+            createdAt: new Date(Date.now() - 7200000).toISOString(),
+          }
+        ];
+        setAllMessages(mockHistory);
+        setLoading(false);
+        return;
+      }
+
       const u = localStorage.getItem("_sk3");
       try {
         const res = await api.get(`/chat/history/${u}`);
@@ -114,6 +138,35 @@ const ChatDashboard = () => {
     setIsLoading(true);
 
     const u = localStorage.getItem("_sk3");
+
+    if (localStorage.getItem("_mock_session") === "true") {
+      setTimeout(() => {
+        const responses = [
+          "¡Excelente pregunta culinaria! Para lograr el mejor sabor con eso, te recomiendo marinar los ingredientes durante 30 minutos en una mezcla de ajo, comino, limón y un chorrito de cerveza rubia. Cuéntame, ¿qué guarnición tienes pensada?",
+          "Entendido. Como recomendación del chef, la cocción ideal para este tipo de corte es a fuego lento (a fuego indirecto si es parrilla) durante unos 25 minutos para mantener la jugosidad. ¿Te gustaría saber cómo preparar una salsa para acompañar?",
+          "¡Esa combinación es espectacular! Para complementar esos sabores, puedes saltear cebolla morada y ají amarillo en tiras con un chorro de vinagre tinto y sillao. ¡Quedará exquisito!",
+          "Para un emplatado elegante y profesional, te sugiero colocar una base cremosa (puede ser un puré rústico o crema de tarwi), la proteína cortada en diagonal encima, y decorar con brotes verdes o perejil fresco picado finamente."
+        ];
+        const aiResponse = responses[Math.floor(Math.random() * responses.length)];
+
+        setMessages((prev) => [
+          ...prev,
+          { sender: "GEMINI", content: aiResponse },
+        ]);
+
+        setAllMessages((prev) => [
+          ...prev,
+          {
+            sessionId: currentSessionId,
+            prompt: userPrompt,
+            response: aiResponse,
+            createdAt: new Date().toISOString(),
+          },
+        ]);
+        setIsLoading(false);
+      }, 1500);
+      return;
+    }
 
     try {
       const response = await api.post("/chat/ask", {

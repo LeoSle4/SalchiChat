@@ -14,6 +14,41 @@ const AdminDashboard = () => {
   // Hook para consultar el historial general de comandas cada 10 segundos (polling)
   useEffect(() => {
     const fetchData = async () => {
+      if (localStorage.getItem("_mock_session") === "true") {
+        const mockAudit = [
+          {
+            id: 101,
+            username: "chef_carlos",
+            prompt: "Receta rápida de salsa tártara",
+            response: "Mezcla mayonesa, cebolla morada picada, alcaparras, pepinillos y un toque de limón.",
+            platform: "TELEGRAM",
+            estimatedTokens: 120,
+            createdAt: new Date().toISOString(),
+          },
+          {
+            id: 102,
+            username: "user_maria",
+            prompt: "¿Cómo ablandar carne de res?",
+            response: "Puedes usar jugo de piña (que contiene bromelina) o marinar con vinagre por unas horas.",
+            platform: "WEB",
+            estimatedTokens: 95,
+            createdAt: new Date(Date.now() - 1800000).toISOString(),
+          },
+          {
+            id: 103,
+            username: "admin",
+            prompt: "Generar menú vegetariano de 3 tiempos",
+            response: "Entrada: Ensalada de quinoa. Principal: Lasaña de berenjena. Postre: Mousse de aguacate y cacao.",
+            platform: "WEB",
+            estimatedTokens: 250,
+            createdAt: new Date(Date.now() - 7200000).toISOString(),
+          }
+        ];
+        setAuditData(mockAudit);
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await api.get("/chat/history/null");
         setAuditData(res.data);

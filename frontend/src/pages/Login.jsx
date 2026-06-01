@@ -12,6 +12,19 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
+    // Fallback de demostración offline para Vercel o sin Backend
+    if ((username === "admin" && password === "admin") || (username === "user" && password === "user")) {
+      localStorage.setItem("_sk1", username);
+      localStorage.setItem("_sk2", username === "admin" ? "ADMIN" : "USER");
+      localStorage.setItem("_sk3", username === "admin" ? "mock-admin" : "mock-user");
+      localStorage.setItem("_mock_session", "true");
+      navigate("/chat");
+      return;
+    }
+
+    // Si no es demo, quitar bandera de mock y llamar al backend real
+    localStorage.removeItem("_mock_session");
+
     try {
       const response = await api.post("/auth/login", {
         username: username,
@@ -104,6 +117,10 @@ const Login = () => {
             Iniciar Sesión
           </button>
         </form>
+
+        <div className="mt-4 p-2.5 bg-neutral-50 dark:bg-stone-800/50 border border-neutral-200 dark:border-stone-800 text-[10px] text-neutral-500 dark:text-stone-400 font-mono text-center">
+          💡 Demo offline: Usa <strong>admin/admin</strong> o <strong>user/user</strong>.
+        </div>
 
         <div className="mt-8 text-center text-xs text-neutral-500 dark:text-stone-400 font-light border-t border-neutral-100 dark:border-stone-800 pt-6">
           ¿No tienes una cuenta?{" "}
