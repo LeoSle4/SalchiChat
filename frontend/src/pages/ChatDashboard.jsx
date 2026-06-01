@@ -253,7 +253,7 @@ const ChatDashboard = () => {
       )}
 
       <main className="flex-1 flex flex-col justify-between h-full bg-neutral-50 dark:bg-stone-950 relative overflow-hidden">
-        <div className="navbar bg-white dark:bg-stone-900 border-b border-neutral-200 dark:border-stone-800 px-6 justify-between shrink-0 h-16 transition-colors duration-300">
+        <div className="navbar bg-white dark:bg-stone-900 border-b border-neutral-200 dark:border-stone-800 px-4 sm:px-6 justify-between shrink-0 h-16 transition-colors duration-300">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
@@ -281,23 +281,23 @@ const ChatDashboard = () => {
           </div>
         </div>
 
-        <div className="flex-1 p-4 sm:p-6 overflow-y-auto bg-white dark:bg-stone-950 border-b border-neutral-100 dark:border-stone-900">
-          <div className="max-w-3xl mx-auto space-y-6">
+        <div className="flex-1 p-3 sm:p-6 overflow-y-auto bg-white dark:bg-stone-950 border-b border-neutral-100 dark:border-stone-900">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex gap-4 ${msg.sender === "USER" ? "justify-end" : "justify-start"} animate-plate-slide`}
+                className={`flex gap-2 sm:gap-4 ${msg.sender === "USER" ? "justify-end" : "justify-start"} animate-plate-slide`}
               >
                 {msg.sender === "GEMINI" && (
-                  <div className="w-8 h-8 rounded-full border border-neutral-200 dark:border-stone-800 flex items-center justify-center shrink-0 text-xs font-serif bg-neutral-50 dark:bg-stone-900 text-neutral-700 dark:text-stone-300">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-neutral-200 dark:border-stone-800 flex items-center justify-center shrink-0 text-xs font-serif bg-neutral-50 dark:bg-stone-900 text-neutral-700 dark:text-stone-300">
                     C
                   </div>
                 )}
                 <div
-                  className={`relative p-5 max-w-[85%] sm:max-w-xl text-sm leading-relaxed border shadow-sm ${
+                  className={`relative max-w-[80%] sm:max-w-xl text-sm leading-relaxed border shadow-sm ${
                     msg.sender === "USER"
-                      ? "bg-neutral-50 dark:bg-stone-900 text-neutral-900 dark:text-stone-100 border-neutral-200 dark:border-stone-800"
-                      : "bg-white dark:bg-stone-900/40 text-neutral-800 dark:text-stone-250 border-neutral-200 dark:border-stone-800"
+                      ? "p-3.5 sm:p-5 bg-neutral-50 dark:bg-stone-900 text-neutral-900 dark:text-stone-100 border-neutral-200 dark:border-stone-800"
+                      : "p-3.5 pb-8 sm:p-5 sm:pb-6 bg-white dark:bg-stone-900/40 text-neutral-800 dark:text-stone-250 border-neutral-200 dark:border-stone-800"
                   }`}
                 >
                   <div className="prose prose-sm prose-neutral dark:prose-invert max-w-none">
@@ -316,20 +316,20 @@ const ChatDashboard = () => {
                   )}
                 </div>
                 {msg.sender === "USER" && (
-                  <div className="w-8 h-8 rounded-full border border-neutral-200 dark:border-stone-800 flex items-center justify-center shrink-0 text-xs font-serif bg-black dark:bg-stone-900 text-white dark:text-stone-300">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-neutral-200 dark:border-stone-800 flex items-center justify-center shrink-0 text-xs font-serif bg-black dark:bg-stone-900 text-white dark:text-stone-300">
                     U
                   </div>
                 )}
               </div>
             ))}
             {isLoading && (
-              <div className="flex gap-4 justify-start">
-                <div className="w-8 h-8 rounded-full border border-primary flex items-center justify-center shrink-0 bg-neutral-50 dark:bg-stone-900 text-primary animate-pan-sizzle">
+              <div className="flex gap-2 sm:gap-4 justify-start">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-primary flex items-center justify-center shrink-0 bg-neutral-50 dark:bg-stone-900 text-primary animate-pan-sizzle">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21V9.75M3.284 14.253A8.987 8.987 0 013 12c0-4.97 4.03-9 9-9s9 4.03 9 9c0 .777-.098 1.53-.284 2.253m-17.432 0A9.025 9.025 0 0012 15m0 0a9.025 9.025 0 007.432-3.747M12 15V9.75"/>
                   </svg>
                 </div>
-                <div className="p-5 max-w-xl text-sm italic text-neutral-400 dark:text-stone-500 bg-white dark:bg-stone-900/40 border border-neutral-100 dark:border-stone-900 flex items-center gap-3">
+                <div className="p-3.5 sm:p-5 max-w-[80%] sm:max-w-xl text-sm italic text-neutral-450 dark:text-stone-500 bg-white dark:bg-stone-900/40 border border-neutral-100 dark:border-stone-900 flex items-center gap-3">
                   <div className="flex gap-1">
                     <span className="w-1.5 h-1.5 bg-primary rounded-full animate-steam-float"></span>
                     <span className="w-1.5 h-1.5 bg-primary rounded-full animate-steam-float [animation-delay:0.2s]"></span>
